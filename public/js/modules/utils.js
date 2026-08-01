@@ -33,6 +33,25 @@ window.InstaAppUtils = {
         }
     },
 
+    showToast(message, type = 'info') {
+        const toastEl = document.getElementById('liveToast');
+        const toastMessage = document.getElementById('toastMessage');
+        const toastIcon = document.getElementById('toastIcon');
+
+        if (!toastEl || !toastMessage || !toastIcon) return;
+
+        toastMessage.innerText = message;
+        toastIcon.className = type === 'success' 
+            ? 'bi bi-check-circle-fill text-success fs-5'
+            : type === 'danger' 
+            ? 'bi bi-exclamation-triangle-fill text-danger fs-5' 
+            : 'bi bi-info-circle-fill text-info fs-5';
+
+        if (this.toast) {
+            this.toast.show();
+        }
+    },
+
     escapeHtml(text) {
         if (!text) return '';
         return text
