@@ -26,7 +26,7 @@ class Post extends Model
         if (filter_var($this->image_path, FILTER_VALIDATE_URL)) {
             return $this->image_path;
         }
-        return asset('storage/' . $this->image_path);
+        return asset('http://127.0.0.1:8000/storage/' . $this->image_path);
     }
 
     public function user(): BelongsTo
