@@ -102,9 +102,6 @@ window.InstaAppPosts = {
                             <i class="bi bi-chat"></i>
                         </button>
                     </div>
-                    <button class="action-btn me-0" onclick="app.showToast('Postingan disimpan!', 'success')">
-                        <i class="bi bi-bookmark"></i>
-                    </button>
                 </div>
 
                 <!-- Likes Count -->

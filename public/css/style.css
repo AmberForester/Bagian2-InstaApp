@@ -204,3 +204,88 @@ body {
     opacity: 0.4;
     cursor: default;
 }
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #000;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 3px;
+}
+
+.insta-main-content {
+    margin-left: 245px;
+    max-width: 630px;
+    padding: 24px 12px;
+}
+
+/* Toast alert notification */
+.toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1090;
+}
+
+/* Navigation Sidebar (Desktop) */
+.insta-sidebar {
+    background-color: #000000;
+    border-right: 1px solid var(--insta-border);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 245px;
+    padding: 24px 12px;
+    z-index: 1030;
+    display: flex;
+    flex-direction: column;
+}
+
+.insta-logo {
+    font-family: 'Grand Hotel', cursive, sans-serif;
+    font-size: 2.2rem;
+    color: #fff;
+    text-decoration: none;
+    padding: 0 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+} 
+
+ .insta-logo-icon {
+    background: var(--insta-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-link-insta {
+    color: var(--insta-text-primary);
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 12px 14px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    text-decoration: none;
+}
+
+.nav-link-insta:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.nav-link-insta i {
+    font-size: 1.5rem;
+}
+
+.nav-link-insta.active {
+    font-weight: 700;
+}
+
