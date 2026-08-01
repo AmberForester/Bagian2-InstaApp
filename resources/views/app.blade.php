@@ -24,6 +24,8 @@
 
     @include('posts.create-modal')
 
+    @include('posts.comments-modal')
+
     <!-- Scripts -->
     @include('layouts.scripts')
 
