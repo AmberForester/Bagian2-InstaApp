@@ -17,9 +17,12 @@
         @include('profile.index')
     </main>
 
+
     @include('auth.modal')
 
     @include('layouts.toast')
+
+    @include('posts.create-modal')
 
     <!-- Scripts -->
     @include('layouts.scripts')

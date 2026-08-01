@@ -178,6 +178,21 @@ window.InstaAppPosts = {
         }
     },
 
+    openCreatePostModal(e) {
+        if (e) e.preventDefault();
+        if (!this.currentUser) {
+            this.showAuthModal('login');
+            this.showToast('Silakan login terlebih dahulu untuk membuat postingan.', 'danger');
+            return;
+        }
+
+        const form = document.getElementById('createPostForm');
+        const previewBox = document.getElementById('imagePreviewBox');
+        if (form) form.reset();
+        if (previewBox) previewBox.classList.add('d-none');
+        if (this.createPostModal) this.createPostModal.show();
+    },
+
     previewPostImage(e) {
         const file = e.target.files[0];
         if (file) {
@@ -189,6 +204,67 @@ window.InstaAppPosts = {
                 if (previewBox) previewBox.classList.remove('d-none');
             };
             reader.readAsDataURL(file);
+        }
+    },
+
+    async handleCreatePost(e) {
+        e.preventDefault();
+        const fileInput = document.getElementById('postImageInput');
+        const captionInput = document.getElementById('postCaptionInput');
+        const submitBtn = document.getElementById('btnSubmitPost');
+
+        if (!fileInput || !fileInput.files[0]) {
+            this.showToast('Silakan pilih gambar terlebih dahulu.', 'danger');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('image', fileInput.files[0]);
+        formData.append('caption', captionInput ? captionInput.value.trim() : '');
+
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="spinner-border spinner-border-sm me-1"></span> Mengunggah...`;
+        }
+
+        try {
+            await this.apiFetch('/api/posts', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (this.createPostModal) this.createPostModal.hide();
+            this.loadFeed();
+            this.showToast('Postingan Anda berhasil diterbitkan! 🎉', 'success');
+        } catch (err) {
+            const msg = err.data?.message || 'Gagal mengunggah postingan. Pastikan ukuran file < 10MB.';
+            this.showToast(msg, 'danger');
+        } finally {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="bi bi-send me-1"></i> Bagikan Postingan`;
+            }
+        }
+    },
+
+    async deletePost(postId) {
+        if (!confirm('Apakah Anda yakin ingin menghapus postingan ini?')) return;
+
+        try {
+            await this.apiFetch(`/api/posts/${postId}`, { method: 'DELETE' });
+
+            const postCard = document.getElementById(`post-card-${postId}`);
+            if (postCard) {
+                postCard.style.transition = 'all 0.3s ease';
+                postCard.style.opacity = '0';
+                postCard.style.transform = 'scale(0.95)';
+                setTimeout(() => postCard.remove(), 300);
+            }
+
+            this.showToast('Postingan berhasil dihapus!', 'success');
+        } catch (err) {
+            const msg = err.data?.message || 'Gagal menghapus postingan.';
+            this.showToast(msg, 'danger');
         }
     },
 };
