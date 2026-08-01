@@ -6,6 +6,7 @@
 <script src="{{ asset('js/modules/auth.js') }}"></script>
 <script src="{{ asset('js/modules/posts.js') }}"></script>
 <script src="{{ asset('js/modules/comments.js') }}"></script>
+<script src="{{ asset('js/modules/profile.js') }}"></script>
 
 <!-- Application Main Frontend Script -->
 <script src="{{ asset('js/app.js') }}"></script>

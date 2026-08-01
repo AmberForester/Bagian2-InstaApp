@@ -20,10 +20,12 @@ class InstaApp {
         const authModalEl = document.getElementById('authModal');
         const createPostModalEl = document.getElementById('createPostModal');
         const commentsModalEl = document.getElementById('commentsModal');
+        const liveToastEl = document.getElementById('liveToast');
 
         if (authModalEl) this.authModal = new bootstrap.Modal(authModalEl);
         if (createPostModalEl) this.createPostModal = new bootstrap.Modal(createPostModalEl);
         if (commentsModalEl) this.commentsModal = new bootstrap.Modal(commentsModalEl);
+        if (liveToastEl) this.toast = new bootstrap.Toast(liveToastEl);
 
         // Check authentication state
         await this.checkAuthStatus();
@@ -37,6 +39,7 @@ Object.assign(InstaApp.prototype, window.InstaAppUtils || {});
 Object.assign(InstaApp.prototype, window.InstaAppAuth || {});
 Object.assign(InstaApp.prototype, window.InstaAppPosts || {});
 Object.assign(InstaApp.prototype, window.InstaAppComments || {});
+Object.assign(InstaApp.prototype, window.InstaAppProfile || {});
 
 // Instantiate Global App
 const app = new InstaApp();
